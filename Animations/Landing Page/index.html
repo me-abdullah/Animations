@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #010101;
+        overflow-x: hidden;
+        color: #fff;
+      }
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+      }
+      nav ul li {
+        list-style: none;
+        display: inline-block;
+        margin: 0 10px;
+      }
+      nav ul li a {
+        position: relative;
+        content: "";
+      }
+      nav ul li a::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 1px;
+        background-color: #fff;
+        transition: all ease 0.5s;
+      }
+      nav ul li a:hover::before {
+        width: 100%;
+      }
+      .content {
+        height: 100vh;
+        padding: 0 20px;
+        align-items: center;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+      .content .text {
+        width: 100%;
+      }
+      .content .img_group {
+        position: absolute;
+        top: 15%;
+        left: 0;
+        margin: 0 auto;
+        width: 100%;
+        padding: 0 20px;
+        z-index: -1;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .content .img_group img {
+        opacity: 0;
+        margin: 0 10px;
+      }
+      h1 {
+        font-size: 48px;
+        font-weight: 400;
+        line-height: 1.2;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      h1 .digitizers {
+        position: relative;
+      }
+      h1 .digitizers::before {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        background-color: #fff;
+        left: 0;
+        bottom: 0;
+        transition: all ease 1s;
+      }
+      h1 .digitizers:hover::before {
+        width: 100%;
+      }
+      .bottom_text {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        text-align: center;
+        width: 100%;
+      }
+      .bottom_text {
+        font-size: 18px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+      .logo {
+        width: 50px;
+      }
+
+      /* Media Queries for Responsiveness */
+      @media (min-width: 768px) {
+        header {
+          padding: 30px 60px;
+        }
+        nav ul li {
+          margin: 0 15px;
+        }
+        .content {
+          padding: 0 40px;
+        }
+        .content .img_group {
+          padding: 0 40px;
+        }
+        h1 {
+          font-size: 72px;
+        }
+      }
+      @media (min-width: 1024px) {
+        header {
+          padding: 50px 100px;
+        }
+        nav ul li {
+          margin: 0 20px;
+        }
+        .content {
+          padding: 0 100px;
+          flex-direction: row;
+          text-align: left;
+        }
+        .content .img_group {
+          padding: 0 100px;
+        }
+        h1 {
+          font-size: 126px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="#"><img src="logo.png" class="logo" /></a>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="content">
+      <div class="text">
+        <h1>
+          <span>We</span>
+          <span>Are</span>
+          <span class="digitizers">Digitizers</span>
+        </h1>
+      </div>
+      <div class="img_group">
+        <div class="img_group_inner">
+          <img src="p2.jpg" alt="" />
+          <img src="p3.jpg" alt="" />
+          <img src="p4.jpg" alt="" />
+          <img src="p5.jpg" alt="" />
+        </div>
+      </div>
+      <div class="bottom_text">
+        <h5>Digitizers, Vector Artist, and Patches Expert</h5>
+      </div>
+    </section>
+
+    <!-- Load jQuery first -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Load Lettering.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
+    <!-- Load GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+
+    <!-- Custom script should come after the libraries are loaded -->
+    <script>
+      $(document).ready(function () {
+        $(".text h1 span, .bottom_text h5").lettering();
+        var tl = gsap.timeline();
+        tl.from(".text h1 span", {
+          x: -20,
+          duration: 1,
+          opacity: 0,
+          stagger: 0.1,
+        })
+        .from(".img_group img", {
+          x: 1100,
+          duration: 1,
+          opacity: 0,
+          stagger: .14
+        })
+        .to(".img_group img", {
+          x: 0,
+          margin: '0 -140px 0',
+          duration: 1,
+          opacity: 1,
+          rotate: 15,
+          stagger: .14
+        }, '-=1.4')
+        .from(".bottom_text h5 span", {
+          x: -20,
+          duration: 1,
+          opacity: 0,
+          stagger: 0.7
+        })
+        .from(".logo header", {
+          y: -20,
+          duration: 1,
+          opacity: 0,
+        })
+        .from("header nav li", {
+          y: -20,
+          duration: 1,
+          opacity: 0,
+          stagger: 0.7
+        });
+
+        setTimeout(() => {
+          $(".digitizers").mouseover(function () {
+            gsap.to(".img_group img", {
+              x: 100,
+              margin: '0 10px 0',
+              duration: 1,
+              opacity: 1,
+              rotate: 0,
+              stagger: .14
+            });
+          });
+        }, 500);
+        
+        setTimeout(() => {
+          $(".digitizers").mouseout(function () {
+            gsap.to(".img_group img", {
+              x: 1100,
+              margin: '0 -140px 0',
+              duration: 1,
+              opacity: 1,
+              rotate: 15,
+              stagger: .14
+            });
+          });
+        }, 5000);
+      });
+    </script>
+  </body>
+</html>
